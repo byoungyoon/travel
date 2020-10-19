@@ -1,6 +1,7 @@
-package service;
+package travel.commons;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class DBUtil {
 	public Connection getConnection() throws Exception{

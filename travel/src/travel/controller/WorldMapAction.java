@@ -1,4 +1,4 @@
-package controller;
+package travel.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import travel.dao.CountryDao;
+import travel.service.*;
+import travel.vo.ContinentAndCountry;
+
 import java.util.ArrayList;
-import service.*;
 
 @WebServlet("/WorldMapAction")
 public class WorldMapAction extends HttpServlet {

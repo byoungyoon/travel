@@ -1,4 +1,4 @@
-package controller;
+package travel.filter;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -13,26 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*")
-public class Filter implements javax.servlet.Filter {
+@WebFilter("/views/auth/*")
+public class LoginFilter implements javax.servlet.Filter {
+    public LoginFilter() {}
+	public void destroy() {}
 
-    /**
-     * Default constructor. 
-     */
-    public Filter() {
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {		
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)resp;
@@ -40,8 +25,7 @@ public class Filter implements javax.servlet.Filter {
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
-		
-		System.out.println(session.getAttribute("loginId"));
+		System.out.println(session.getAttribute("loginId") + ": 로그인 아이디");
 		
 		if(session.getAttribute("loginId") == null) {
 			System.out.println("로그인 입력 세션의 정보가 없습니다");
@@ -51,8 +35,6 @@ public class Filter implements javax.servlet.Filter {
 		chain.doFilter(request, response);
 	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+	public void init(FilterConfig fConfig) throws ServletException {}
 
 }

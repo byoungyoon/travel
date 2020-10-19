@@ -1,4 +1,4 @@
-package service;
+package travel.vo;
 
 public class Country {
 	private int countryNo;

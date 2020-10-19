@@ -1,4 +1,4 @@
-package service;
+package travel.vo;
 
 public class ContinentAndCountry {
 	public Continent continent;

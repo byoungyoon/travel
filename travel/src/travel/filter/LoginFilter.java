@@ -29,7 +29,7 @@ public class LoginFilter implements javax.servlet.Filter {
 		
 		if(session.getAttribute("loginId") == null) {
 			System.out.println("로그인 입력 세션의 정보가 없습니다");
-			request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
 		}
 		
 		chain.doFilter(request, response);

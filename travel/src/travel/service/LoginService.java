@@ -15,7 +15,6 @@ public class LoginService {
 	public Login getLoginCk(String loginId, String loginPw){
 		Login getLogin = null;
 		Connection conn = null;
-		PreparedStatement stmt = null;
 		
 		try {
 			DBUtil dbUtil = new DBUtil();

@@ -18,23 +18,17 @@ public class LoginFilter implements javax.servlet.Filter {
     public LoginFilter() {}
 	public void destroy() {}
 
-	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {		
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)resp;
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("loginId") + ": 로그인 아이디");
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {				
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		System.out.println(session.getAttribute("loginId") + ": 세션 정보(로그인 아이디)");
 		
 		if(session.getAttribute("loginId") == null) {
 			System.out.println("로그인 입력 세션의 정보가 없습니다");
-			request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 		}
 		
 		chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {}
-
 }

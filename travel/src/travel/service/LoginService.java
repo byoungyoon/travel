@@ -11,13 +11,16 @@ import travel.vo.Login;
 
 public class LoginService {
 	private LoginDao loginDao;
+	private DBUtil dbUtil;
 	
 	public Login getLoginCk(String loginId, String loginPw){
 		Login getLogin = null;
 		Connection conn = null;
 		
+		loginDao = new LoginDao();
+		dbUtil = new DBUtil();
+		
 		try {
-			DBUtil dbUtil = new DBUtil();
 			conn = dbUtil.getConnection();
 			conn.setAutoCommit(false);
 			

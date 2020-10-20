@@ -36,5 +36,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div>
+		방문자 수 : ${stats.cnt}, 전체 방문자 수 : ${sumCnt}
+	</div>
 </body>
 </html>

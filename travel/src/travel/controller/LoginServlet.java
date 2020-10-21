@@ -28,6 +28,8 @@ public class LoginServlet extends HttpServlet {
 		if(session.getAttribute("loginId") != null) {
 			System.out.println(session.getAttribute("loginId") + ": 로그인 세션");
 			statsService = new StatsService();
+			
+			// 방문자 수 표시
 			Map<String, Object> map = statsService.getStats();
 			
 			Stats stats = (Stats)map.get("stats");
@@ -35,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 			
 			request.setAttribute("stats", stats);
 			request.setAttribute("sumCnt", sumCnt);
+			
 			request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
 			return;
 		}
@@ -58,6 +61,17 @@ public class LoginServlet extends HttpServlet {
 		if(login != null) {
 			System.out.println("로그인 아이디를 세션으로 추가");
 			session.setAttribute("loginId", loginId);
+			
+			// 방문자 수 표시
+			statsService = new StatsService();
+			Map<String, Object> map = statsService.getStats();
+			
+			Stats stats = (Stats)map.get("stats");
+			int sumCnt = (Integer)map.get("sumCnt");
+			
+			request.setAttribute("stats", stats);
+			request.setAttribute("sumCnt", sumCnt);
+			
 			request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
 			return;
 		}

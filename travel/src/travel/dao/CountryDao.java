@@ -10,9 +10,10 @@ import travel.vo.Country;
 
 import java.sql.*;
 
-public class CountryDao {
+public class CountryDao implements ICountryDao{
 	private CountryQuary countryQuary;
-	// 대륙을 선택하였을 때 나오는 나라
+	
+	@Override	// 대륙을 선택하였을 때 나오는 나라
 	public List<ContinentAndCountry> selectCountryByContinent(Connection conn, String continentName) throws Exception{
 		List<ContinentAndCountry> list = new ArrayList<ContinentAndCountry>();
 			
@@ -26,7 +27,8 @@ public class CountryDao {
 			cac.setCountry(new Country());
 			cac.setContinent(new Continent());
 				
-			cac.getCountry().setCountryName(rs.getString("country_name"));
+			cac.getCountry().setCountryName(rs.getString("ct.country_name"));
+			cac.getContinent().setContinentName(rs.getString("co.continent_name"));
 			
 			list.add(cac);
 		}

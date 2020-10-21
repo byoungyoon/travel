@@ -7,10 +7,16 @@ import java.util.List;
 
 import travel.commons.DBUtil;
 import travel.dao.CountryDao;
+import travel.dao.ICountryDao;
 import travel.vo.ContinentAndCountry;
 
 public class MapService {
-	private CountryDao countryDao;
+	private ICountryDao iCountryDao;
+	
+	public MapService(ICountryDao iCountryDao) {
+		this.iCountryDao = iCountryDao;
+	}
+	
 	private DBUtil dbUtil;
 	
 	//
@@ -18,7 +24,6 @@ public class MapService {
 		Connection conn = null;
 		
 		List<ContinentAndCountry> list = new ArrayList<ContinentAndCountry>();
-		countryDao = new CountryDao();
 		dbUtil = new DBUtil();
 		
 		try {
@@ -26,7 +31,7 @@ public class MapService {
 			conn.setAutoCommit(false);
 			System.out.println(conn + ": countryService(getSelectCountryByContinent) conn확인");
 			
-			list = countryDao.selectCountryByContinent(conn, continentName);
+			list = iCountryDao.selectCountryByContinent(conn, continentName);
 			System.out.println(list + "<-- countryService(getSelectCountryByContinent) list확인");
 			
 			conn.commit();

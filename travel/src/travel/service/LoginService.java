@@ -6,18 +6,23 @@ import java.sql.SQLException;
 import java.util.List;
 
 import travel.commons.DBUtil;
+import travel.dao.ILoginDao;
 import travel.dao.LoginDao;
 import travel.vo.Login;
 
 public class LoginService {
-	private LoginDao loginDao;
+	private ILoginDao iLoginDao;
 	private DBUtil dbUtil;
+	
+	public LoginService() {}
+	public LoginService(ILoginDao iLoginDao) {
+		this.iLoginDao = iLoginDao;
+	}
 	
 	public Login getLoginCk(String loginId, String loginPw){
 		Login getLogin = null;
 		Connection conn = null;
 		
-		loginDao = new LoginDao();
 		dbUtil = new DBUtil();
 		
 		try {
@@ -28,7 +33,7 @@ public class LoginService {
 			getLogin.setLoginId(loginId);
 			getLogin.setLoginPw(loginPw);
 			
-			getLogin = loginDao.loginCk(conn, getLogin);
+			getLogin = iLoginDao.loginCk(conn, getLogin);
 			
 			conn.commit();
 			

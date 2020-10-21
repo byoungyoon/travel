@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import travel.dao.CountryDao;
 import travel.service.MapService;
 import travel.vo.ContinentAndCountry;
 
@@ -19,7 +20,7 @@ public class MapServlet extends HttpServlet {
 		String continentName = request.getParameter("continentName");
 		System.out.println(continentName + "<--- Map");
 
-		MapService mapService = new MapService();
+		MapService mapService = new MapService(new CountryDao());
 		
 		List<ContinentAndCountry> list = mapService.getSelectCountryByContinent(continentName);
 		

@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import commons.DBUtil;
 import travel.quary.LoginQuary;
 import travel.vo.Login;
 
-public class LoginDao {
+public class LoginDao implements ILoginDao{
 	private LoginQuary loginQuary;
-	// login체크 메서드
+	
+	@Override  // login체크 메서드
 	public Login loginCk(Connection conn, Login login) throws Exception{
 		Login getLogin = null;
 		loginQuary = new LoginQuary();

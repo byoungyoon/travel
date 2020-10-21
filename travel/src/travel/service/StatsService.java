@@ -11,11 +11,17 @@ import com.sun.org.apache.xerces.internal.impl.dv.xs.DayDV;
 
 import travel.commons.DBUtil;
 import travel.commons.DayUtil;
+import travel.dao.IStatsDao;
 import travel.dao.StatsDao;
 import travel.vo.Stats;
 
 public class StatsService {
-	private StatsDao statsDao;
+	private IStatsDao iStatsDao;
+	
+	public StatsService(IStatsDao iStatsDao) {
+		this.iStatsDao = iStatsDao;
+	}
+	
 	private DBUtil dbUtil;
 	private DayUtil dayUtil;
 	
@@ -23,7 +29,6 @@ public class StatsService {
 	public void countStats() {
 		Connection conn = null;
 		
-		statsDao = new StatsDao();
 		dbUtil = new DBUtil();
 		dayUtil = new DayUtil();
 		
@@ -38,11 +43,11 @@ public class StatsService {
 			Stats stats = new Stats();
 			stats.setDay(day);
 			
-			if(statsDao.selectDay(conn, stats)) {
-				statsDao.updateStats(conn, stats);
+			if(iStatsDao.selectDay(conn, stats)) {
+				iStatsDao.updateStats(conn, stats);
 			}
 			else {
-				statsDao.insertStats(conn, stats);
+				iStatsDao.insertStats(conn, stats);
 			}
 			
 			conn.commit();
@@ -56,7 +61,7 @@ public class StatsService {
 	
 	public Map<String, Object> getStats(){
 		Map<String, Object> map = new HashMap<String, Object>();
-		statsDao = new StatsDao();
+
 		dbUtil = new DBUtil();
 		dayUtil = new DayUtil();
 		
@@ -73,8 +78,8 @@ public class StatsService {
 			Stats Setstats = new Stats();
 			Setstats.setDay(day);
 			
-			Stats stats = statsDao.selectCnt(conn, Setstats);
-			int sumCnt = statsDao.selectSumCnt(conn);
+			Stats stats = iStatsDao.selectCnt(conn, Setstats);
+			int sumCnt = iStatsDao.selectSumCnt(conn);
 			
 			System.out.println(stats + "<--- 최종  stats");
 			System.out.println(sumCnt + "<--- 최종 sumCnt");

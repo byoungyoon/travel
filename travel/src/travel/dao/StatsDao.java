@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 import travel.quary.StatsQuary;
 import travel.vo.Stats;
 
-public class StatsDao {
+public class StatsDao implements IStatsDao{
 	private StatsQuary statsQuary;
 	
-	// 오늘 날짜가 있는지 없는지 체크
+	@Override	// 오늘 날짜가 있는지 없는지 체크
 	public boolean selectDay(Connection conn, Stats stats) throws Exception{
 		boolean result = false;
 		
@@ -31,7 +31,7 @@ public class StatsDao {
 		return result;
 	}
 	
-	// 오늘 날짜가 없으면 오늘 날짜를 추가(selectDay - false)
+	@Override	// 오늘 날짜가 없으면 오늘 날짜를 추가(selectDay - false)
 	public void insertStats(Connection conn, Stats stats) throws Exception{
 		statsQuary = new StatsQuary();
 		
@@ -44,7 +44,7 @@ public class StatsDao {
 		stmt.close();
 	}
 	
-	// 오늘 날짜가 있으면 오늘 날짜의 cnt 업데이트(selectDay - true)
+	@Override	// 오늘 날짜가 있으면 오늘 날짜의 cnt 업데이트(selectDay - true)
 	public void updateStats(Connection conn, Stats stats) throws Exception{
 		statsQuary = new StatsQuary();
 		
@@ -57,7 +57,7 @@ public class StatsDao {
 		stmt.close();
 	}
 	
-	// 오늘 날짜의 카운터 수
+	@Override	// 오늘 날짜의 카운터 수
 	public Stats selectCnt(Connection conn, Stats stats) throws Exception {
 		Stats returnStats = null;
 		statsQuary = new StatsQuary();
@@ -76,7 +76,7 @@ public class StatsDao {
 		return returnStats;
 	}
 	
-	// 전체 날짜의 카운터 수
+	@Override	// 전체 날짜의 카운터 수
 	public int selectSumCnt(Connection conn) throws Exception{
 		int result = 1;
 		

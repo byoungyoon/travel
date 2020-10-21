@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -26,13 +27,13 @@
 				<div id="header">
 					<div id="logo">
 						<h1>
-							<a href="#">Lets's go travel</a>
+							<a href="${pageContext.request.contextPath}/IndexServlet">Lets's go travel</a>
 						</h1>
 					</div>
 					<div id="nav">
 						<ul>
 							<li class="first active">
-								<a href="#">Home</a>
+								<a href="${pageContext.request.contextPath}/IndexServlet">Home</a>
 							</li>
 							<li>
 								<a href="#">Services</a>
@@ -67,49 +68,58 @@
 						</p>
 						<ul class="linkedList">
 							<li class="first">
-								<a href="#">All Map</a>
+								<a href="${pageContext.request.contextPath}/IndexServlet">All Map</a>
 							</li>
 							<li>
-								<a href="#">North America</a>
+								<a href="${pageContext.request.contextPath}/MapServlet?continentName=north america">North America</a>
 							</li>
 							<li>
-								<a href="#">South america</a>
+								<a href="${pageContext.request.contextPath}/MapServlet?continentName=south america">South america</a>
 							</li>
 							<li>
-								<a href="#">Europe</a>
+								<a href="${pageContext.request.contextPath}/MapServlet?continentName=europe">Europe</a>
 							</li>
 							<li>
-								<a href="#">Africa</a>
+								<a href="${pageContext.request.contextPath}/MapServlet?continentName=africa">Africa</a>
 							</li>
 							<li>
-								<a href="#">Asia</a>
+								<a href="${pageContext.request.contextPath}/MapServlet?continentName=asia">Asia</a>
 							</li>
 							<li class="last">
-								<a href="#">Australia</a>
+								<a href="${pageContext.request.contextPath}/MapServlet?continentName=australia">Australia</a>
 							</li>
 						</ul>
 					</div>
 					<div id="content">
 						<div id="box1">
-							<h2>
-								World Map
-							</h2>
-							<br></br>
-							<img class="left" usemap="#worldMap" src="https://ifh.cc/g/2srtOW.jpg" width="890" height="410" alt="" />
-							<map id="WorldMap" name="worldMap">
-								<area shape="rect" alt="" title="" coords="24,20,300,196" href="${pageContext.request.contextPath}/MapServlet?continentName=north america"/>
-								<area shape="rect" alt="" title="" coords="146,208,288,386" href="${pageContext.request.contextPath}/MapServlet?continentName=south america"/>
-								<area shape="rect" alt="" title="" coords="322,122,494,334" href="${pageContext.request.contextPath}/MapServlet?continentName=africa"/>
-								<area shape="rect" alt="" title="" coords="372,38,468,108" href="${pageContext.request.contextPath}/MapServlet?continentName=europe"/>
-								<area shape="rect" alt="" title="" coords="500,24,770,260" href="${pageContext.request.contextPath}/MapServlet?continentName=asia"/>
-								<area shape="rect" alt="" title="" coords="634,274,806,374" href="${pageContext.request.contextPath}/MapServlet?continentName=australia"/>
-								<!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
-							</map>
-							
-							<p>
-								Please click on the desired area in the photo
-							</p>
-						</div>
+						<c:choose>
+							<c:when test="${list eq null}">
+								<h2>
+									World Map
+								</h2>
+								<br></br>
+								<img class="left" usemap="#worldMap" src="https://ifh.cc/g/2srtOW.jpg" width="890" height="410" alt="" />
+								<map id="WorldMap" name="worldMap">
+									<area shape="rect" alt="" title="" coords="24,20,300,196" href="${pageContext.request.contextPath}/MapServlet?continentName=north america"/>
+									<area shape="rect" alt="" title="" coords="146,208,288,386" href="${pageContext.request.contextPath}/MapServlet?continentName=south america"/>
+									<area shape="rect" alt="" title="" coords="322,122,494,334" href="${pageContext.request.contextPath}/MapServlet?continentName=africa"/>
+									<area shape="rect" alt="" title="" coords="372,38,468,108" href="${pageContext.request.contextPath}/MapServlet?continentName=europe"/>
+									<area shape="rect" alt="" title="" coords="500,24,770,260" href="${pageContext.request.contextPath}/MapServlet?continentName=asia"/>
+									<area shape="rect" alt="" title="" coords="634,274,806,374" href="${pageContext.request.contextPath}/MapServlet?continentName=australia"/>
+									<!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) -->
+								</map>
+								<p>
+									Please click on the desired area in the photo
+								</p>
+							</c:when>
+							<c:when test="${list ne null}">
+								<c:forEach var="b" items="${list}">
+									<h2>
+										${b.continent.continentName}
+									</h2>
+								</c:forEach>
+							</c:when>
+						</c:choose>
 						<br class="clear" />
 					</div>
 					<br class="clear" />
@@ -117,7 +127,7 @@
 				
 			</div>
 			<div id="copyright">
-				&copy; travel | Made by <a href="http://templated.co" rel="nofollow">byoungyoon</a>
+				&copy; travel | Made by byoungyoon
 			</div>
 		</div>
     </body>

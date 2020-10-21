@@ -17,10 +17,9 @@ import travel.vo.Stats;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-	/*
-	 * 페이지 사용자가 맞는지 확인(로그인)
-	 */
 	private StatsService statsService;
+	
+	// 처음 실행 하였을때
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		HttpSession session = request.getSession();
 		
@@ -45,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 
-	
+	// 로그인 시 넘어 오는 서블랫
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String loginId = request.getParameter("loginId");
 		String loginPw = request.getParameter("loginPw");

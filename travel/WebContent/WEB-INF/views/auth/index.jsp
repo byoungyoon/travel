@@ -168,6 +168,7 @@
 				
 			</div>
 			<div id="copyright">
+				<p>visitant : ${stats.cnt} / ${sumCnt}</p>
 				&copy; travel | Made by byoungyoon
 			</div>
 		</div>

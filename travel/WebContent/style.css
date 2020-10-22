@@ -99,14 +99,14 @@ ul {
 }
 
 #copyright {
-	margin: 40px 0 0 0;
+	margin: 15px 0 0 0;
 	text-align: center;
 	color: #707070;
 	font-size: 0.9em;
 }
 
-#copyright a {
-	color: #888888;
+#copyright p {
+	text-align: right;
 }
 
 #footer {

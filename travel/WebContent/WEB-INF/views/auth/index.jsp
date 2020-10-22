@@ -92,7 +92,7 @@
 					</div>
 					<div id="content">
 						<div id="box1">
-						<c:choose>
+							<c:choose>
 							<c:when test="${list eq null}">
 								<h2>
 									World Map
@@ -116,12 +116,55 @@
 								<h2>
 									${continent.continentName}
 								</h2>
+								
+								<p>
+									<c:forEach var="b" items="${list}">
+										<img src="/travel/images/${b.country.countryPic }"></img>
+										${b.country.countryName}
+									</c:forEach>
+								</p>
+								
+								<div id="box2">
+									
+								</div>
 							</c:when>
 						</c:choose>
 						<br class="clear" />
 					</div>
 					<br class="clear" />
 				</div>
+					<br class="clear" />
+				</div>
+				
+				<div id="footer">
+					<div id="footerSidebar">
+						<h3>
+							Latest Reviews
+						</h3>
+						<ul class="linkedList">
+							<li class="first">
+								<a href="#">1</a>
+							</li>
+							<li>
+								<a href="#">2</a>
+							</li>
+							<li class="last">
+								<a href="#">3</a>
+							</li>
+						</ul>
+					</div>
+					<div id="footerContent">
+						<h3>
+							Proin dolor nullam
+						</h3>
+						<p>
+							Magna euismod risus interdum vulputate viverra. Urna ultrices vitae ornare volutpat. Pellentesque penatibus 
+							semper aliquam mollis. Urna lobortis elit eget a dignissim rutrum. Integer ipsum ligula sociis tellus quam enim. 
+							Nibh nec phasellus mattis montes faucibus malesuada. Venenatis cubilia odio volutpat phasellus facilisis 
+							ultricies convallis. Convallis purus urna suspendisse consectetur feugiat. Varius dignissim aliquet montes 
+							libero. Consectetur a lobortis nulla montes quisque blandit. Primis eget vestibulum pretium turpis.
+						</p>
+					</div>
 				
 			</div>
 			<div id="copyright">

@@ -4,6 +4,7 @@ public class Country {
 	private int countryNo;
 	private int continentNo;
 	private String countryName;
+	private String countryPic;
 	
 	public int getCountryNo() {
 		return countryNo;
@@ -23,11 +24,16 @@ public class Country {
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
+	public String getCountryPic() {
+		return countryPic;
+	}
+	public void setCountryPic(String countryPic) {
+		this.countryPic = countryPic;
+	}
+	
 	@Override
 	public String toString() {
 		return "Country [countryNo=" + countryNo + ", continentNo=" + continentNo + ", countryName=" + countryName
-				+ "]";
+				+ ", countryPic=" + countryPic + "]";
 	}
-	
-	
 }

@@ -29,6 +29,7 @@ public class CountryDao implements ICountryDao{
 				
 			cac.getCountry().setCountryName(rs.getString("ct.country_name"));
 			cac.getContinent().setContinentName(rs.getString("co.continent_name"));
+			cac.getCountry().setCountryPic(rs.getString("ct.country_pic"));
 			
 			list.add(cac);
 		}

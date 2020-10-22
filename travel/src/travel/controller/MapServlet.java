@@ -30,7 +30,7 @@ public class MapServlet extends HttpServlet {
 		Map<String, Object> map = mapService.getSelectCountryByContinent(continentName);
 		System.out.println(map + "<-- controller list");
 		
-		List<ContinentAndCountry> list = (List<ContinentAndCountry>)map.get("list");
+		List<ContinentAndCountry> list = (List)map.get("list");
 		Continent continent = (Continent)map.get("continent");
 		
 		request.setAttribute("list", list);

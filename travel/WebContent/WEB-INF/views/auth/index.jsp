@@ -113,11 +113,9 @@
 								</p>
 							</c:when>
 							<c:when test="${list ne null}">
-								<c:forEach var="b" items="${list}">
-									<h2>
-										${b.continent.continentName}
-									</h2>
-								</c:forEach>
+								<h2>
+									${continent.continentName}
+								</h2>
 							</c:when>
 						</c:choose>
 						<br class="clear" />

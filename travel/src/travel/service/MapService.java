@@ -3,11 +3,14 @@ package travel.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import travel.commons.DBUtil;
 import travel.dao.CountryDao;
 import travel.dao.ICountryDao;
+import travel.vo.Continent;
 import travel.vo.ContinentAndCountry;
 
 public class MapService {
@@ -20,10 +23,10 @@ public class MapService {
 	private DBUtil dbUtil;
 	
 	//
-	public List<ContinentAndCountry> getSelectCountryByContinent(String continentName){
+	public Map<String, Object> getSelectCountryByContinent(String continentName){
 		Connection conn = null;
 		
-		List<ContinentAndCountry> list = new ArrayList<ContinentAndCountry>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		dbUtil = new DBUtil();
 		
 		try {
@@ -31,8 +34,13 @@ public class MapService {
 			conn.setAutoCommit(false);
 			System.out.println(conn + ": countryService(getSelectCountryByContinent) conn확인");
 			
-			list = iCountryDao.selectCountryByContinent(conn, continentName);
+			List<ContinentAndCountry> list = iCountryDao.selectCountryByContinent(conn, continentName);
 			System.out.println(list + "<-- countryService(getSelectCountryByContinent) list확인");
+			Continent continent = new Continent();
+			continent.setContinentName(continentName);
+			
+			map.put("list", list);
+			map.put("continent", continent);
 			
 			conn.commit();
 		} catch(Exception e) {
@@ -42,6 +50,6 @@ public class MapService {
 		} finally {
 			try {conn.close();} catch(SQLException e) {e.printStackTrace();}
 		}
-		return list;
+		return map;
 	}
 }

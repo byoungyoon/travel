@@ -9,24 +9,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import travel.dao.CountryDao;
 import travel.service.MapService;
+import travel.vo.Continent;
 import travel.vo.ContinentAndCountry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/MapServlet")
 public class MapServlet extends HttpServlet {
+	private MapService mapService;
+	
+	// ¸Ê¿¡ °üÇÑ get controller
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String continentName = request.getParameter("continentName");
 		System.out.println(continentName + "<--- Map");
 
-		MapService mapService = new MapService(new CountryDao());
+		mapService = new MapService(new CountryDao());
 		
-		List<ContinentAndCountry> list = mapService.getSelectCountryByContinent(continentName);
+		Map<String, Object> map = mapService.getSelectCountryByContinent(continentName);
+		System.out.println(map + "<-- controller list");
 		
-		System.out.println(list + "<-- controller list");
+		List<ContinentAndCountry> list = (List<ContinentAndCountry>)map.get("list");
+		Continent continent = (Continent)map.get("continent");
 		
 		request.setAttribute("list", list);
+		request.setAttribute("continent", continent);
+		
 		request.getRequestDispatcher("/WEB-INF/views/auth/index.jsp").forward(request, response);
 	}
 
